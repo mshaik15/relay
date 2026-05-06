@@ -20,5 +20,5 @@
 Makefile linguist-language=Makefile
 *.toml linguist-language=TOML
 *.md linguist-documentation=true
-tests/** linguist-detectable=false
+tests/** linguist-vendored=true
 docs/** linguist-documentation=true
