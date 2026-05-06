@@ -1,0 +1,24 @@
+# Normalize line endings
+* text=auto
+
+# Source
+*.py    text eol=lf
+*.toml  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.log   text eol=lf
+
+# Binary — never diff or mangle
+*.pt    binary
+*.onnx  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+
+# Linguist — GitHub language bar
+*.py linguist-language=Python
+Makefile linguist-language=Makefile
+*.toml linguist-language=TOML
+*.md linguist-documentation=true
+tests/** linguist-detectable=false
+docs/** linguist-documentation=true
