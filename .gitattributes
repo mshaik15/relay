@@ -15,7 +15,6 @@
 *.jpg   binary
 *.jpeg  binary
 
-# Linguist — GitHub language bar
 *.py linguist-language=Python
 Makefile linguist-language=Makefile
 *.toml linguist-language=TOML
