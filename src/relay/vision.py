@@ -13,9 +13,11 @@ class VisionModel:
         self._model = None
 
     def load(self) -> None:
+        """ Load YOLO model """
         self._model = YOLO(self._model_path)
 
     def predict(self, frame):
+        """ Run inference on a frame and return detections sorted by conf (descending) """
         if self._model is None:
             raise RuntimeError("YOLO model is not loaded, call loat() before predict()")
         

@@ -21,6 +21,7 @@ _s7_PORT = 102
 
 # tag parser
 def _parse_tag(tag: str) -> tuple[int, int, int]:
+    """ parse a tag string into area_code, byte_offset, bit_offset """
     tag = tag.strip().upper()
     for prefix in ("DB", "I", "Q", "M", "C", "T"):
         if tag.startswith(prefix):
@@ -67,13 +68,15 @@ def _cotp_dt(payload: bytes) -> bytes:
     """ wrap payload into a COTP DF """
     return bytes([0x02, 0xF0, 0x80]) + payload
 
+
 def _s7_header(msg_type: int, param_len: int, data_len: int, pdu_ref: int = 1) -> bytes:
+    """ Build a s7 communication parameter block """
     return struct.pack(
-        "!BBHHHHH", # but PDU ref is little-endian — pack separately
+        "!BBHHHH", # but PDU ref is little-endian, pack separately
         0x32, # protocol ID
         msg_type,
-        0x0000, # reserved
-        pdu_ref, # PDU reference (copied back in replies) — actually big-endian per spec
+        0x0000,
+        pdu_ref, # PDU reference (copied back in replies) , actually big-endian per spec
         param_len,
         data_len,
     )
@@ -169,6 +172,7 @@ class s7Driver(PLCDriver):
         return bytes(buf)
  
     def _next_pdu_ref(self) -> int:
+        """ Return the next PDU reference counter, wrapping at 0xFFFF """
         ref = self._pdu_ref
         self._pdu_ref = (self._pdu_ref % 0xFFFF) + 1
         return ref
@@ -182,7 +186,7 @@ class s7Driver(PLCDriver):
         # response[1] is the COTP PDU type; 0xD0 = Connection Confirm
         if len(response) < 2 or response[1] != 0xD0:
             raise PLCConnectionError(
-                f"COTP handshake failed — expected CC (0xD0), got: {response.hex()}"
+                f"COTP handshake failed , expected CC (0xD0), got: {response.hex()}"
             )
  
     def _s7_negotiate(self) -> None:
@@ -196,7 +200,7 @@ class s7Driver(PLCDriver):
         s7 = response[3:]
         if len(s7) < 2 or s7[1] != 0x03:
             raise PLCConnectionError(
-                f"s7 negotiate failed — expected Ack-Data (0x03), got: {response.hex()}"
+                f"s7 negotiate failed , expected Ack-Data (0x03), got: {response.hex()}"
             )
  
     # PLCDriver interface

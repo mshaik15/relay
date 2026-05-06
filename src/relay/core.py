@@ -30,6 +30,7 @@ class RelayPipeline:
         self._running = False
 
     def start(self) -> None:
+        """ Connect the PLC, load model and start the watchdog thread """
         logger.info("Connecting to PLC")
         self.driver.connect()
 
@@ -41,6 +42,7 @@ class RelayPipeline:
         logger.info("Pipeline started")
 
     def stop(self) -> None:
+        """ Stop watchdog, write safe state and disconnect from the PLC """
         self._running = False
         self._watchdog.stop()
         try:
@@ -53,6 +55,7 @@ class RelayPipeline:
         logger.info("Pipeline Stopped")
 
     def step(self, frame) -> bool:
+        """ Run one frame through the model and filter, write PLC output if triggered """
         if not self._watchdog.is_healthy():
             raise RuntimeError("Watchdog tripped, pipeline stopped, restart")
         

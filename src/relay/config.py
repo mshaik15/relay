@@ -34,6 +34,7 @@ class RelayConfig(BaseModel):
     @field_validator("confidence_threshold")
     @classmethod
     def validate_confidence(cls, x:float) -> float:
+        """ Reject conf outside of (0,1) exclusive """
         if not 0.0 < x < 1.0:
             raise ValueError("confidence_threshold must be between 0 and 1, exclusive")
         return x
@@ -41,6 +42,7 @@ class RelayConfig(BaseModel):
     @field_validator("consecutive_frames")
     @classmethod
     def validate_frames(cls, y:int) -> int:
+        """ Reject consecutive_frames values of zero or less """
         if not 0 < y:
             raise ValueError("consecutive_frames must be greater than 0")
         return y

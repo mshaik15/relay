@@ -7,6 +7,8 @@ class TemporalFilter:
 
 
     def update(self, label: str, confidence: float) -> bool:
+        """ Increment streak counter if label matches and confidence clears thresh,
+        return true when streak reaches consecutive_frames """
         if confidence < self.threshold:
             self.count = 0
             self.current_label = None
@@ -23,5 +25,6 @@ class TemporalFilter:
         return False
     
     def reset(self):
+        """ Clear the current label and streak counter """
         self.count = 0
         self.current_label = None

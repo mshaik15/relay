@@ -11,8 +11,6 @@ except ImportError as _e:
 
 class ABDriver(PLCDriver):
     """ Allen-Bradley EtherNet/IP driver that connects to ControlLogix and CompactLogix PLCs over TCP/44818 """
-
-
     def __init__(self, ip: str, slot: int = 0):
         self._ip   = ip
         self._slot = slot

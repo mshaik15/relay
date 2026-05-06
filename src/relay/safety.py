@@ -15,23 +15,28 @@ class Watchdog:
         self._thread: Thread | None = None
 
     def start(self) -> None:
+        """ Start the background monitoring thread """
         self._thread = Thread(target=self._run, daemon=True)
         self._thread.start()
 
     def stop(self) -> None:
+        """ Signal the thread to exit and block until it finishes """
         self._stop_event.set()
         if self._thread is not None:
             self._thread.join()
 
     def heartbeat(self) -> None:
+        """ Record the current time, reactivate health in recover mode """
         self._last_heartbeat = time.time()
         if self.recover:
             self._healthy = True
 
     def is_healthy(self) -> bool:
+        """ Return True if the watchdog has not tripped """
         return self._healthy
 
     def _run(self) -> None:
+        """ Background loop, write safe state and stop if heartbeat goes beyond the interval """
         while not self._stop_event.is_set():
             self._stop_event.wait(self.interval)
 
