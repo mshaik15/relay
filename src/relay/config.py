@@ -19,11 +19,17 @@ class ABConfig(BaseModel):
 
 PLCConfig = Annotated[Union[S7Config, ABConfig], Field(discriminator='type')]
 
+class WatchdogMode(str, Enum):
+    stop = 'stop'
+    recover = 'recover'
+
 class RelayConfig(BaseModel):
     plc_config: PLCConfig
     confidence_threshold: float
     consecutive_frames: int
     output_tag: str
+    safe_state: bool = False
+    watchdog_mode: WatchdogMode = WatchdogMode.stop
 
     @field_validator("confidence_threshold")
     @classmethod
