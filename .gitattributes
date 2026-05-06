@@ -2,18 +2,18 @@
 * text=auto
 
 # Source
-*.py    text eol=lf
-*.toml  text eol=lf
-*.md    text eol=lf
-*.txt   text eol=lf
-*.log   text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.log text eol=lf
 
 # Binary — never diff or mangle
-*.pt    binary
-*.onnx  binary
-*.png   binary
-*.jpg   binary
-*.jpeg  binary
+*.pt binary
+*.onnx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
 
 *.py linguist-language=Python
 Makefile linguist-language=Makefile
