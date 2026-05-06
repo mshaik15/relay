@@ -1,4 +1,4 @@
-## Installation -- **ITS NOT DEPLOYED - so it isnt on pip or anything**
+## Installation
 
 ```bash
 # Siemens S7 only (no extra dependencies)
@@ -202,3 +202,6 @@ Key log events: PLC connect/disconnect, model load, watchdog trips, PLC write fa
 | `PLCWriteError`    | A tag write is rejected by the PLC or the socket is closed |
 | `PLCReadError`     | A tag read is rejected by the PLC or the socket is closed |
 | `RuntimeError`     | `step()` is called after the watchdog has tripped in `"stop"` mode |
+
+
+**ITS NOT DEPLOYED - so it isnt on pip or anything**
