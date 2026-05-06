@@ -3,7 +3,7 @@ Scripts i used to connect YOLO machine vision to PLC
 
 This starteed as a collection of scripts i wrote for my last work term, making it easier to connect YOLO to a PLC without needing Cognex and Keyence. I finally cleaned it up into a proper package for practice and configured for my own work, not a published library. Probably wont work out the box for most people either
 
-again this was mainly a learning experaince for packaging CV applications and writing test code using tools like pytest
+**again this was mainly a learning experaince for packaging CV applications and writing test code using tools like pytest**
 
 # How it works (in theory)
 ![Relay Diagram](Relay_Diagram.svg)
